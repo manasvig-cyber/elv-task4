@@ -1,0 +1,119 @@
+Cyber Security Internship: Setup and Use Firewall
+
+Introduction
+
+This guide covers the practical steps to configure and test basic firewall rules on Windows and Linux systems. The objective is to block inbound traffic on a specific port (such as Telnet on port 23), allow important services like SSH (port 22 on Linux), verify firewall rules, and understand how firewall filtering controls network traffic. The guide includes screenshots and commands to document your work for submission.
+
+Key Concepts
+Firewall:
+ A network security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules.
+
+Inbound vs. Outbound Rules:
+ Inbound rules control traffic entering the network; outbound rules control traffic leaving the network.
+
+Ports:
+ Logical communication endpoints; blocking or allowing traffic on specific ports controls service access.
+
+UFW:
+ Uncomplicated Firewall, a simple command-line interface for managing firewall rules on Linux.
+
+Windows Firewall:
+ Built-in firewall service in Windows with a GUI and richer configuration options.
+
+Step-by-Step Procedure for Windows Firewall
+1. Open Windows Firewall Configuration Tool
+Press Win + R, type wf.msc, and press Enter.
+
+This opens the Windows Defender Firewall with Advanced Security console.
+
+2. List Current Firewall Rules
+In the left pane, click on Inbound Rules.
+
+Scroll to view enabled and disabled rules.
+
+Optionally, you can export or screenshot this list for documentation.
+
+3. Add a Rule to Block Inbound Traffic on Port 23 (Telnet)
+Right-click Inbound Rules > New Rule...
+
+Select Port and click Next.
+
+Choose TCP, specify 23 as the local port, click Next.
+
+Select Block the connection, then Next.
+
+Check Domain, Private, and Public profiles; click Next.
+
+Give the rule a name, e.g., "Block Telnet Port 23", and click Finish.
+
+4. Test the Rule
+Try connecting to port 23 locally or remotely using Telnet client.
+
+The connection should fail, showing the rule is effective.
+
+5. Remove the Test Block Rule
+In Inbound Rules, find the "Block Telnet Port 23" rule.
+
+Right-click it and select Delete.
+
+Confirm rule removal to restore original state.
+
+Screenshots to Capture for Windows Task
+Windows Firewall main console showing inbound rules.
+
+New Rule Wizard steps.
+
+Telnet connection test before and after applying the block rule.
+
+Step-by-Step Procedure for Linux Using UFW
+1. Open Terminal and Check UFW Status
+bash
+sudo ufw status verbose
+Confirm if UFW is active or inactive.
+
+2. Add a Rule to Block Inbound Traffic on Port 23 (Telnet)
+bash
+sudo ufw deny 23
+This blocks all inbound connections on port 23.
+
+3. Add Rule to Allow SSH on Port 22
+bash
+sudo ufw allow 22
+Ensures SSH connections remain enabled for remote access.
+
+4. Test the Blocking of Port 23
+Try to connect to port 23 using Telnet or any other tool.
+
+The connection should be refused/blocked.
+
+5. Remove the Test Block Rule
+bash
+sudo ufw delete deny 23
+This restores access on port 23 if needed.
+
+6. List Current Firewall Rules
+bash
+sudo ufw status numbered
+Shows all active rules with numbers for easy deletion or modification.
+
+Screenshots to Capture for Linux Task
+Terminal showing UFW status.
+
+Commands used to add/block/allow/delete rules.
+
+Test connection results before and after applying the rules.
+
+How Firewall Filters Traffic
+Firewalls inspect packets based on source/destination IP, port number, and protocol.
+
+Rules specify whether to allow or block packets matching certain criteria.
+
+Stateful firewalls track connection state, allowing return traffic for established connections.
+
+Blocking port 23 prevents insecure Telnet access, reducing risk of interception.
+
+Allowing SSH (port 22) ensures secure remote management remains possible.
+
+Conclusion
+This task provides hands-on experience with firewall configuration and basic network security. Being able to block vulnerable ports like Telnet while allowing essential traffic like SSH improves system security posture. Understanding inbound and outbound rules builds foundational skills in network traffic filtering, firewall rule management, and securing endpoints for cybersecurity roles.
+
